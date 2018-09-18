@@ -15,7 +15,9 @@
         background: transparent;
         position: relative;
         margin: 300px 400px;
-        overflow: hidden;
+        /* overflow: hidden; */
+        border-bottom:5px solid black;
+
       }
       .son{
         transition: left 0.6s;
@@ -34,45 +36,63 @@
       .son2{
         background: skyblue;
       }
+      .son3{
+        background: yellow;
+      }
+      .son4{
+        background: orange;
+      }
+      .son5{
+        background: cyan;
+      }
+      .son6{
+        background: red;
+      }
+      .son7{
+        background: #644;
+      }
+
     </style>
 </head>
 
 <body>
-  <p><span>temp % 200:</span> <span id="asd"></span></p>
-  <button type="button" name="button" onclick="dong()">dong</button>
+  <p><span>arr0 % 200:</span> <span id="asd"></span></p>
+  <button type="button" name="button" onclick="dong(200)">dong</button>
   <div class="wrap">
-    <div class="son">1</div>
-    <div class="son son1" style="left:200px;">2</div>
-    <div class="son son2" style="left:400px;">3</div>
+    <div class="son">go</div>
+    <div class="son son1" style="left:200px;">a</div>
+    <div class="son son2" style="left:400px;">b</div>
+    <div class="son son3" style="left:600px;">c</div>
+    <div class="son son4" style="left:800px;">d</div>
+    <div class="son son5" style="left:1000px;">e</div>
+    <div class="son son6" style="left:1200px;">f</div>
+    <div class="son son7" style="left:1400px;">g</div>
   </div>
   <script>
     let a = document.querySelector(".wrap")
     let c = a.children
     let d = Array.from(c)
 
-    function dong() {
-
-      let temp = window.window.getComputedStyle(d[0]).left.split('px')[0]
-      let temp1 = window.window.getComputedStyle(d[1]).left.split('px')[0]
+    function dong(single) {
       let arr0 = window.window.getComputedStyle(d[0]).left.split('px')[0]
-      let arr1 = window.window.getComputedStyle(d[1]).left.split('px')[0]
-      let arr2 = window.window.getComputedStyle(d[2]).left.split('px')[0]
-      document.getElementById('asd').innerHTML = temp % 200;
-      if (temp % 200 == 0) { //看看都到位没,防止点太快bug
-        d[0].style.zIndex = 0;
-        d[1].style.zIndex = 1; //层级关系:往右跑的在最底下
-        d[2].style.zIndex = 2;
-        d[1].style.left = `${arr1-200}px`;
-        d[2].style.left = `${arr2-200}px`;
-        if (temp == "-200") { //左边到头了就push到右边
-          d[0].style.left = `200px`
+      //
+      // let arr2 = window.window.getComputedStyle(d[2]).left.split('px')[0]
+      document.getElementById('asd').innerHTML = arr0 % single;
+      if (arr0 % single == 0) { //看看都到位没,防止点太快bug
+        for(let i=0;i<d.length;i++){//层级关系:往右跑的在最底下
+          d[i].style.zIndex = 0;
+          let _left = window.window.getComputedStyle(d[i]).left.split('px')[0]
+          d[i].style.left = `${_left-200}px`;
+        }
+        d[0].style.zIndex = -1;
+        d[1].style.zIndex = 1;
+        if (arr0 == "-200") { //左边到头了就push到右边
+          d[0].style.left = `${single*(d.length-2)}px`
           d.push(d.shift()) //
-        } else {
-          d[0].style.left = `${arr0-200}px`;
         }
       }
     }
   </script>
 </body>
-  
+
 </html>
