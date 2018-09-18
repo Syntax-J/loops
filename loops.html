@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      .wrap{
+        height: 200px;
+        width: 200px;
+        background: transparent;
+        position: relative;
+overflow: hidden;
+      }
+      .son{
+transition: all 1s;
+opacity: 1;
+        position:absolute;
+        left: 0;
+        background: pink;
+        height: 200px;
+        width: 200px;
+
+        box-sizing: border-box;
+      }
+      .son1{
+        background: red;
+      }
+      .son2{
+        background: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" name="button" onclick="dong()">dong</button>
+    <div class="wrap">
+      <div class="son">1</div>
+      <div class="son son1" style="left:200px;">2</div>
+      <div class="son son2" style="left:400px;">3</div>
+    </div>
+    <script>
+    let a=document.querySelector(".wrap")
+    let len=a.length
+    let c=a.children
+    let d=Array.from(c)
+      function dong() {
+
+        d[2].style.display="block";
+        let temp=window.window.getComputedStyle(d[0]).left.split('px')[0]
+        if(temp=="-200"){
+          d[0].style.display="none";
+          d.push(d.shift())
+        }
+
+        let arr0=window.window.getComputedStyle(d[0]).left.split('px')[0]
+        let arr1=window.window.getComputedStyle(d[1]).left.split('px')[0]
+        let arr2=window.window.getComputedStyle(d[2]).left.split('px')[0]
+        arr0=="-200"? d[0].style.left=`200px`:d[0].style.left=`${arr0-200}px`
+          arr1=="-200"?   d[1].style.left=`200px`:     d[1].style.left =`${arr1-200}px`
+          arr2=="-200"?    d[2].style.left=`200px`:    d[2].style.left=`${arr2-200}px`
+
+      }
+    </script>
+  </body>
+
+</html>
