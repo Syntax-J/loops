@@ -56,7 +56,7 @@
       let temp1 = window.window.getComputedStyle(d[0]).left.split('px')[0]
       let temp2 = window.window.getComputedStyle(d[0]).left.split('px')[0]
       document.getElementById('asd').innerHTML = temp % 200;
-      if (temp % 200 == 0 || temp1 % 200 == 0 || temp2 % 200 == 0) { //防点太快bug
+      if (temp % 200 == 0 && temp1 % 200 == 0) { //防点太快bug
 
         d[2].style.display = "block"; //末尾显示回来
         if (temp == "-200") { //左边出去的push到右边
