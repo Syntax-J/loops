@@ -18,27 +18,27 @@
         overflow: hidden;
       }
       .son{
-        transition: all 1s;
+        transition: left 0.6s;
         opacity: 1;
         position:absolute;
         left: 0;
-        background: green;
+        background: yellowgreen;
         height: 200px;
         width: 200px;
 
         box-sizing: border-box;
       }
       .son1{
-        background: red;
+        background: hotpink;
       }
       .son2{
-        background: blue;
+        background: skyblue;
       }
     </style>
 </head>
 
 <body>
-  <p id="asd">123</p>
+  <p><span>temp % 200:</span> <span id="asd"></span></p>
   <button type="button" name="button" onclick="dong()">dong</button>
   <div class="wrap">
     <div class="son">1</div>
@@ -47,32 +47,32 @@
   </div>
   <script>
     let a = document.querySelector(".wrap")
-    let len = a.length
     let c = a.children
     let d = Array.from(c)
 
     function dong() {
-      let temp = window.window.getComputedStyle(d[0]).left.split('px')[0]
-      let temp1 = window.window.getComputedStyle(d[0]).left.split('px')[0]
-      let temp2 = window.window.getComputedStyle(d[0]).left.split('px')[0]
-      document.getElementById('asd').innerHTML = temp % 200;
-      if (temp % 200 == 0 && temp1 % 200 == 0) { //防点太快bug
 
-        d[2].style.display = "block"; //末尾显示回来
-        if (temp == "-200") { //左边出去的push到右边
-          d[0].style.display = "none";
-          d.push(d.shift())
+      let temp = window.window.getComputedStyle(d[0]).left.split('px')[0]
+      let temp1 = window.window.getComputedStyle(d[1]).left.split('px')[0]
+      let arr0 = window.window.getComputedStyle(d[0]).left.split('px')[0]
+      let arr1 = window.window.getComputedStyle(d[1]).left.split('px')[0]
+      let arr2 = window.window.getComputedStyle(d[2]).left.split('px')[0]
+      document.getElementById('asd').innerHTML = temp % 200;
+      if (temp % 200 == 0) { //看看都到位没,防止点太快bug
+        d[0].style.zIndex = 0;
+        d[1].style.zIndex = 1; //层级关系:往右跑的在最底下
+        d[2].style.zIndex = 2;
+        d[1].style.left = `${arr1-200}px`;
+        d[2].style.left = `${arr2-200}px`;
+        if (temp == "-200") { //左边到头了就push到右边
+          d[0].style.left = `200px`
+          d.push(d.shift()) //
+        } else {
+          d[0].style.left = `${arr0-200}px`;
         }
-        //出去的变成右边最后个，不然就左移动200
-        let arr0 = window.window.getComputedStyle(d[0]).left.split('px')[0]
-        let arr1 = window.window.getComputedStyle(d[1]).left.split('px')[0]
-        let arr2 = window.window.getComputedStyle(d[2]).left.split('px')[0]
-        arr0 == "-200" ? d[0].style.left = `200px` : d[0].style.left = `${arr0-200}px`
-        arr1 == "-200" ? d[1].style.left = `200px` : d[1].style.left = `${arr1-200}px`
-        arr2 == "-200" ? d[2].style.left = `200px` : d[2].style.left = `${arr2-200}px`
       }
     }
   </script>
 </body>
-
+  
 </html>
